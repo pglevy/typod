@@ -1,0 +1,112 @@
+[
+  {
+    "guid": "ep-tech-2025-02-08",
+    "title": "The Future of WebAssembly",
+    "feedTitle": "Tech Talks Daily",
+    "feedSlug": "tech-talks-daily",
+    "artworkSrc": null,
+    "pubDate": "2025-02-08T14:00:00Z",
+    "duration": 2700,
+    "enclosureUrl": "https://example.com/audio/wasm-future.mp3",
+    "description": "A deep dive into how WebAssembly is reshaping browser performance and enabling new classes of web applications."
+  },
+  {
+    "guid": "ep-history-2025-02-08",
+    "title": "The Silk Road: Trade and Culture",
+    "feedTitle": "History Unwrapped",
+    "feedSlug": "history-unwrapped",
+    "artworkSrc": null,
+    "pubDate": "2025-02-08T10:00:00Z",
+    "duration": 3840,
+    "enclosureUrl": "https://example.com/audio/silk-road.mp3",
+    "description": "Exploring how the ancient Silk Road connected civilizations and transformed economies across continents."
+  },
+  {
+    "guid": "ep-design-2025-02-07",
+    "title": "Typography in the Digital Age",
+    "feedTitle": "Design Matters",
+    "feedSlug": "design-matters",
+    "artworkSrc": null,
+    "pubDate": "2025-02-07T16:00:00Z",
+    "duration": 1920,
+    "enclosureUrl": "https://example.com/audio/typography.mp3",
+    "description": "Why font choices still matter in 2025 and how variable fonts are changing the game for web designers."
+  },
+  {
+    "guid": "ep-tech-2025-02-06",
+    "title": "Edge Computing Explained",
+    "feedTitle": "Tech Talks Daily",
+    "feedSlug": "tech-talks-daily",
+    "artworkSrc": null,
+    "pubDate": "2025-02-06T14:00:00Z",
+    "duration": 2280,
+    "enclosureUrl": "https://example.com/audio/edge-computing.mp3",
+    "description": "Understanding edge computing, why it matters, and how it complements cloud infrastructure."
+  },
+  {
+    "guid": "ep-history-2025-02-05",
+    "title": "The Library of Alexandria",
+    "feedTitle": "History Unwrapped",
+    "feedSlug": "history-unwrapped",
+    "artworkSrc": null,
+    "pubDate": "2025-02-05T10:00:00Z",
+    "duration": 4320,
+    "enclosureUrl": "https://example.com/audio/alexandria.mp3",
+    "description": "The rise and fall of the ancient world's greatest repository of knowledge."
+  },
+  {
+    "guid": "ep-design-2025-02-04",
+    "title": "Color Theory for Interfaces",
+    "feedTitle": "Design Matters",
+    "feedSlug": "design-matters",
+    "artworkSrc": null,
+    "pubDate": "2025-02-04T16:00:00Z",
+    "duration": 2100,
+    "enclosureUrl": "https://example.com/audio/color-theory.mp3",
+    "description": "How to build effective color palettes that work across light and dark modes."
+  },
+  {
+    "guid": "ep-tech-2025-02-03",
+    "title": "Deno 2.0 and the Runtime Wars",
+    "feedTitle": "Tech Talks Daily",
+    "feedSlug": "tech-talks-daily",
+    "artworkSrc": null,
+    "pubDate": "2025-02-03T14:00:00Z",
+    "duration": 3060,
+    "enclosureUrl": "https://example.com/audio/deno2.mp3",
+    "description": "Comparing Deno 2.0, Node.js, and Bun — which JavaScript runtime should you pick in 2025?"
+  },
+  {
+    "guid": "ep-history-2025-02-02",
+    "title": "The Printing Press Revolution",
+    "feedTitle": "History Unwrapped",
+    "feedSlug": "history-unwrapped",
+    "artworkSrc": null,
+    "pubDate": "2025-02-02T10:00:00Z",
+    "duration": 3600,
+    "enclosureUrl": "https://example.com/audio/printing-press.mp3",
+    "description": "How Gutenberg's invention democratized knowledge and changed the course of human history."
+  },
+  {
+    "guid": "ep-design-2025-02-01",
+    "title": "Micro-interactions That Delight",
+    "feedTitle": "Design Matters",
+    "feedSlug": "design-matters",
+    "artworkSrc": null,
+    "pubDate": "2025-02-01T16:00:00Z",
+    "duration": 1680,
+    "enclosureUrl": "https://example.com/audio/micro-interactions.mp3",
+    "description": "Small animations and transitions that make the difference between a good UI and a great one."
+  },
+  {
+    "guid": "ep-tech-2025-01-31",
+    "title": "Static Sites in 2025",
+    "feedTitle": "Tech Talks Daily",
+    "feedSlug": "tech-talks-daily",
+    "artworkSrc": null,
+    "pubDate": "2025-01-31T14:00:00Z",
+    "duration": 2460,
+    "enclosureUrl": "https://example.com/audio/static-sites.mp3",
+    "description": "Why static sites are making a comeback and the tools that make them practical for real applications."
+  }
+]

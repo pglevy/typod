@@ -1,0 +1,25 @@
+{
+  "name": "typod",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "fetch-feeds": "tsx scripts/fetch-feeds.ts",
+    "build": "tsc -p tsconfig.json && vite build",
+    "build:full": "npm run fetch-feeds && npm run build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.2",
+    "fast-xml-parser": "^5.3.5",
+    "jsdom": "^28.0.0",
+    "sharp": "^0.34.5",
+    "tsx": "^4.21.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4",
+    "vitest": "^4.0.18"
+  }
+}
