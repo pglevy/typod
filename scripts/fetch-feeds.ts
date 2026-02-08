@@ -104,12 +104,30 @@ export function parseRssFeed(xml: string): ParsedFeed | null {
     const episodes: ParsedEpisode[] = items.slice(0, 10).map((item: unknown) => {
       const i = item as Record<string, unknown>;
       const enclosure = i.enclosure as Record<string, unknown> | undefined;
+      const enclosureUrl = String(enclosure?.['@_url'] ?? '');
+      const itemTitle = String(i.title ?? 'Untitled');
+      const itemPubDate = i.pubDate ? new Date(String(i.pubDate)).toISOString() : new Date().toISOString();
+
+      // Extract GUID from XML parser object (may be { '#text': 'value' } or plain string)
+      let guid = '';
+      if (i.guid) {
+        const guidObj = i.guid as Record<string, unknown> | string;
+        guid = typeof guidObj === 'object' ? String(guidObj['#text'] ?? '') : String(guidObj);
+      }
+      if (!guid) {
+        guid = String(i.link ?? '');
+      }
+      if (!guid || guid === 'undefined') {
+        // Generate a unique identifier from the enclosure URL or title+date
+        guid = enclosureUrl || `${itemTitle}|${itemPubDate}`;
+      }
+
       return {
-        guid: String(i.guid ?? i.link ?? ''),
-        title: String(i.title ?? 'Untitled'),
-        pubDate: i.pubDate ? new Date(String(i.pubDate)).toISOString() : new Date().toISOString(),
+        guid,
+        title: itemTitle,
+        pubDate: itemPubDate,
         duration: parseDuration(i['itunes:duration']),
-        enclosureUrl: String(enclosure?.['@_url'] ?? ''),
+        enclosureUrl,
         description: String(i.description ?? i['itunes:summary'] ?? ''),
       };
     });
