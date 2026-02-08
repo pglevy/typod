@@ -217,7 +217,7 @@ async function main() {
   const feedList = await fetchFeedList(gistUrl);
   console.log(`Fetched ${feedList.length} feed URLs from Gist`);
 
-  const outDir = path.resolve('dist/data');
+  const outDir = path.resolve('public/data');
   await fs.mkdir(outDir, { recursive: true });
 
   const feedResults: { feed: ParsedFeed; slug: string; artworkSrc: string | null }[] = [];
