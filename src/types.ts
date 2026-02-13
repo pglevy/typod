@@ -1,6 +1,7 @@
 export interface Episode {
   guid: string;
   title: string;
+  link: string | null;
   feedTitle: string;
   feedSlug: string;
   artworkSrc: string | null;

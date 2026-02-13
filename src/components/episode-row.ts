@@ -75,7 +75,8 @@ export function createEpisodeRow(
     shareBtn.hidden = true;
     shareBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      const url = `${window.location.origin}${window.location.pathname}#${encodeURIComponent(episode.guid)}`;
+      const url = episode.link
+        ?? `${window.location.origin}${window.location.pathname}#${encodeURIComponent(episode.guid)}`;
       navigator.clipboard.writeText(url).then(() => {
         shareBtn.textContent = 'copied!';
         setTimeout(() => { shareBtn.textContent = 'share'; }, 1500);

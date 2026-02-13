@@ -15,6 +15,7 @@ interface ParsedFeed {
 interface ParsedEpisode {
   guid: string;
   title: string;
+  link: string | null;
   pubDate: string;
   duration: number | null;
   enclosureUrl: string;
@@ -24,6 +25,7 @@ interface ParsedEpisode {
 interface OutputEpisode {
   guid: string;
   title: string;
+  link: string | null;
   feedTitle: string;
   feedSlug: string;
   artworkSrc: string | null;
@@ -122,9 +124,12 @@ export function parseRssFeed(xml: string): ParsedFeed | null {
         guid = enclosureUrl || `${itemTitle}|${itemPubDate}`;
       }
 
+      const itemLink = i.link ? String(i.link) : null;
+
       return {
         guid,
         title: itemTitle,
+        link: itemLink,
         pubDate: itemPubDate,
         duration: parseDuration(i['itunes:duration']),
         enclosureUrl,
@@ -201,6 +206,7 @@ export function mergeAndSort(
       all.push({
         guid: ep.guid,
         title: ep.title,
+        link: ep.link,
         feedTitle: feed.title,
         feedSlug: slug,
         artworkSrc,
