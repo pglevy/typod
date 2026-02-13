@@ -214,10 +214,22 @@ button {
   -webkit-line-clamp: unset;
 }
 
+.episode-actions {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: 2px;
+}
+
 .episode-expand-btn {
   font-size: 0.75rem;
   color: var(--color-accent);
-  margin-top: 2px;
+  padding: 0;
+  display: inline;
+}
+
+.episode-share-btn {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
   padding: 0;
   display: inline;
 }

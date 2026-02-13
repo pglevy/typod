@@ -62,17 +62,38 @@ export function createEpisodeRow(
     desc.className = 'episode-description';
     desc.textContent = descText;
 
+    const actions = document.createElement('div');
+    actions.className = 'episode-actions';
+
     const expandBtn = document.createElement('button');
     expandBtn.className = 'episode-expand-btn';
     expandBtn.textContent = 'more';
+
+    const shareBtn = document.createElement('button');
+    shareBtn.className = 'episode-share-btn';
+    shareBtn.textContent = 'share';
+    shareBtn.hidden = true;
+    shareBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const url = `${window.location.origin}${window.location.pathname}#${encodeURIComponent(episode.guid)}`;
+      navigator.clipboard.writeText(url).then(() => {
+        shareBtn.textContent = 'copied!';
+        setTimeout(() => { shareBtn.textContent = 'share'; }, 1500);
+      });
+    });
+
     expandBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       const expanded = desc.classList.toggle('is-expanded');
       expandBtn.textContent = expanded ? 'less' : 'more';
+      shareBtn.hidden = !expanded;
     });
 
+    actions.appendChild(expandBtn);
+    actions.appendChild(shareBtn);
+
     info.appendChild(desc);
-    info.appendChild(expandBtn);
+    info.appendChild(actions);
   }
 
   row.appendChild(artworkDiv);
