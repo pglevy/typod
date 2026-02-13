@@ -26,6 +26,15 @@ class AudioPlayer {
         this.stopSaveInterval();
       }
     });
+
+    document.addEventListener('visibilitychange', () => {
+      if (!this.currentEpisode) return;
+      if (document.visibilityState === 'visible') {
+        this.emit('timeupdate', this.currentEpisode, this.audio.currentTime, this.audio.duration || 0);
+      } else {
+        this.saveState();
+      }
+    });
   }
 
   play(episode: Episode): void {
