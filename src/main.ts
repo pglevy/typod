@@ -60,6 +60,23 @@ async function init() {
     });
   }
 
+  // Scroll to episode if URL has a hash fragment
+  if (window.location.hash) {
+    const guid = decodeURIComponent(window.location.hash.slice(1));
+    const target = list.querySelector<HTMLElement>(`.episode-row[data-guid="${CSS.escape(guid)}"]`);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const desc = target.querySelector('.episode-description');
+      const expandBtn = target.querySelector<HTMLButtonElement>('.episode-expand-btn');
+      const shareBtn = target.querySelector<HTMLButtonElement>('.episode-share-btn');
+      if (desc && expandBtn) {
+        desc.classList.add('is-expanded');
+        expandBtn.textContent = 'less';
+        if (shareBtn) shareBtn.hidden = false;
+      }
+    }
+  }
+
   // Restore saved playback state
   const saved = getPlaybackState();
   if (saved) {
