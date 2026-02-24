@@ -32,7 +32,11 @@ Want your own podcast player? Here's how to set it up (no coding required):
    https://feeds.example.com/podcast2.xml
    ```
 3. Save the Gist (can be public or secret)
-4. Click the **"Raw"** button and copy the URL (it should look like `https://gist.githubusercontent.com/...`)
+4. Copy the Gist ID from the URL (e.g., `https://gist.github.com/YOUR-USERNAME/GIST-ID`) and form the raw URL like this:
+   ```
+   https://gist.githubusercontent.com/YOUR-USERNAME/GIST-ID/raw/feeds.txt
+   ```
+   Using this format (without a commit hash) ensures the workflow always fetches the latest version of your feed list.
 
 ### 3. Configure GitHub Pages
 
