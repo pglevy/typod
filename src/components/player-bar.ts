@@ -1,5 +1,6 @@
 import { audioPlayer } from '../player';
 import { formatTime } from '../utils';
+import { createPlayerSheet } from './player-sheet';
 
 const PLAY_ICON = `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
 const PAUSE_ICON = `<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
@@ -25,8 +26,19 @@ export function createPlayerBar(): PlayerBarHandle {
   playBtn.innerHTML = PLAY_ICON;
   playBtn.setAttribute('aria-label', 'Play');
 
+  // Sheet (full-screen now-playing view)
+  const sheet = createPlayerSheet();
+  document.body.appendChild(sheet.element);
+
   const info = document.createElement('div');
   info.className = 'player-info';
+  info.setAttribute('role', 'button');
+  info.setAttribute('aria-label', 'Open now playing');
+  info.tabIndex = 0;
+  info.addEventListener('click', () => sheet.show());
+  info.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sheet.show(); }
+  });
 
   const epTitle = document.createElement('div');
   epTitle.className = 'player-episode-title';
