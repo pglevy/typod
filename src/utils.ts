@@ -24,6 +24,11 @@ export function formatDate(isoString: string): string {
 
 export function stripHtml(html: string): string {
   const div = document.createElement('div');
-  div.innerHTML = html;
-  return div.textContent ?? '';
+  // Preserve line breaks from block-level elements and <br> tags
+  div.innerHTML = html
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/p>/gi, '\n')
+    .replace(/<\/div>/gi, '\n')
+    .replace(/<\/li>/gi, '\n');
+  return (div.textContent ?? '').replace(/\n{3,}/g, '\n\n').trim();
 }
