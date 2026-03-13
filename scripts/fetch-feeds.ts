@@ -59,7 +59,7 @@ export async function fetchFeedList(gistUrl: string): Promise<string[]> {
   const urls = text
     .split('\n')
     .map((line) => line.trim())
-    .filter((line) => line.length > 0 && !line.startsWith('#'));
+    .filter((line) => line.startsWith('http://') || line.startsWith('https://'));
 
   if (urls.length === 0) {
     throw new Error('Feed list Gist is empty (no URLs found)');
