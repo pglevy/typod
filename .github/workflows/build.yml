@@ -2,7 +2,7 @@ name: Build and Deploy
 
 on:
   schedule:
-    - cron: '0 22 * * *' # Daily at 5:00 PM ET (22:00 UTC; 6 PM during EDT)
+    - cron: '0 21 * * *' # Daily at 5:00 PM ET (22:00 UTC; 6 PM during EDT)
   workflow_dispatch:
   push:
     branches: [main]
