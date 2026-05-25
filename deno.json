@@ -1,0 +1,14 @@
+{
+  "name": "typod",
+  "version": "0.0.0",
+  "tasks": {
+    "dev": "vite",
+    "fetch-feeds": "deno run --allow-net --allow-read --allow-write --allow-env scripts/fetch-feeds.ts",
+    "build": "tsc -p tsconfig.json && vite build",
+    "build:full": "deno task fetch-feeds && deno task build",
+    "preview": "vite preview",
+    "test": "deno test --allow-read --allow-env",
+    "serve": "deno run --allow-net --allow-read server.ts"
+  },
+  "nodeModulesDir": "auto"
+}
