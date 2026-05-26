@@ -1,5 +1,5 @@
-import { describe, it } from 'jsr:@std/testing/bdd';
-import { assertEquals, assertNotEquals } from 'jsr:@std/assert';
+import { describe, it } from '@std/testing/bdd';
+import { assertEquals, assertNotEquals } from '@std/assert';
 import { parseRssFeed, toSlug, mergeAndSort } from '../fetch-feeds.ts';
 
 const VALID_RSS = `<?xml version="1.0" encoding="UTF-8"?>

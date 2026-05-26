@@ -1,5 +1,5 @@
-import { XMLParser } from 'npm:fast-xml-parser';
-import { join, resolve } from 'jsr:@std/path';
+import { XMLParser } from 'fast-xml-parser';
+import { join, resolve } from '@std/path';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -175,7 +175,7 @@ async function processArtwork(
     if (!res.ok) return null;
     const data = new Uint8Array(await res.arrayBuffer());
 
-    const sharp = (await import('npm:sharp')).default;
+    const sharp = (await import('sharp')).default;
     const artworkDir = join(outDir, 'artwork');
     await Deno.mkdir(artworkDir, { recursive: true });
 
