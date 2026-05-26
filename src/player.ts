@@ -1,5 +1,5 @@
-import type { Episode, PlaybackState } from './types';
-import { savePlaybackState } from './state';
+import type { Episode, PlaybackState } from './types.ts';
+import { savePlaybackState } from './state.ts';
 
 type PlayerEventType = 'play' | 'pause' | 'timeupdate' | 'ended' | 'loaded';
 type PlayerListener = (episode: Episode, currentTime: number, duration: number) => void;

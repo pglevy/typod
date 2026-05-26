@@ -11,12 +11,16 @@ node_modules
 dist
 dist-ssr
 *.local
+.vite
 
 # Environment
 .env
 
 # Deno
 deno.lock
+
+# TypeScript build artifacts
+*.tsbuildinfo
 
 # Generated data
 public/data/artwork/
@@ -33,3 +37,4 @@ public/data/episodes.json
 *.sln
 *.sw?
 .kiro
+.zed

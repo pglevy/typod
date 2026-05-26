@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { describe, it, expect, afterEach, vi } from 'vitest';
-import { getPlaybackState, savePlaybackState } from '../state';
-import type { PlaybackState } from '../types';
+import { getPlaybackState, savePlaybackState } from '../state.ts';
+import type { PlaybackState } from '../types.ts';
 
 const STORAGE_KEY = 'typod_playback';
 

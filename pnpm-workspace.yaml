@@ -1,8 +1,0 @@
-# Security: only allow these packages to run install scripts
-allowBuilds:
-  esbuild: true
-
-# Security: block packages published less than 2 days ago (supply chain protection)
-minimumReleaseAge: 2880
-
-strictPeerDependencies: false
