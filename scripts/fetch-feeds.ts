@@ -147,7 +147,7 @@ export async function fetchAndParseFeed(url: string): Promise<ParsedFeed | null>
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 15_000);
-    const res = await fetch(url, { signal: controller.signal });
+    const res = await fetch(url, { signal: controller.signal, headers: { 'User-Agent': 'Typod/1.0 (podcast-player)' } });
     clearTimeout(timeout);
     if (!res.ok) {
       console.warn(`Feed fetch failed for ${url}: ${res.status}`);
