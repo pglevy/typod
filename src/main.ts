@@ -1,9 +1,9 @@
 import './style.css';
-import type { Episode } from './types';
-import { createEpisodeRow } from './components/episode-row';
-import { createPlayerBar } from './components/player-bar';
-import { audioPlayer } from './player';
-import { getPlaybackState } from './state';
+import type { Episode } from './types.ts';
+import { createEpisodeRow } from './components/episode-row.ts';
+import { createPlayerBar } from './components/player-bar.ts';
+import { audioPlayer } from './player.ts';
+import { getPlaybackState } from './state.ts';
 
 async function init() {
   const app = document.querySelector<HTMLDivElement>('#app');

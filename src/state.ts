@@ -1,4 +1,4 @@
-import type { PlaybackState } from './types';
+import type { PlaybackState } from './types.ts';
 
 const STORAGE_KEY = 'typod_playback';
 

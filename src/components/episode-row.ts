@@ -1,5 +1,5 @@
-import type { Episode } from '../types';
-import { formatDuration, formatDate, stripHtml } from '../utils';
+import type { Episode } from '../types.ts';
+import { formatDuration, formatDate, stripHtml } from '../utils.ts';
 
 export function createEpisodeRow(
   episode: Episode,

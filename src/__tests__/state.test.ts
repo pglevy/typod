@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { getPlaybackState, savePlaybackState } from '../state';
-import type { PlaybackState } from '../types';
+import { describe, it, expect, afterEach, vi } from 'vitest';
+import { getPlaybackState, savePlaybackState } from '../state.ts';
+import type { PlaybackState } from '../types.ts';
 
 const STORAGE_KEY = 'typod_playback';
 
@@ -12,7 +12,8 @@ const sampleState: PlaybackState = {
   updatedAt: '2025-02-08T10:00:00Z',
 };
 
-beforeEach(() => {
+afterEach(() => {
+  vi.restoreAllMocks();
   localStorage.clear();
 });
 
@@ -51,7 +52,6 @@ describe('localStorage unavailable', () => {
     });
     expect(() => getPlaybackState()).not.toThrow();
     expect(getPlaybackState()).toBeNull();
-    vi.restoreAllMocks();
   });
 
   it('savePlaybackState does not throw', () => {
@@ -59,6 +59,5 @@ describe('localStorage unavailable', () => {
       throw new Error('localStorage disabled');
     });
     expect(() => savePlaybackState(sampleState)).not.toThrow();
-    vi.restoreAllMocks();
   });
 });

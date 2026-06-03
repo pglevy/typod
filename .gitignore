@@ -11,6 +11,20 @@ node_modules
 dist
 dist-ssr
 *.local
+.vite
+
+# Environment
+.env
+
+# Deno
+deno.lock
+
+# TypeScript build artifacts
+*.tsbuildinfo
+
+# Generated data
+public/data/artwork/
+public/data/episodes.json
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +36,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.kiro
+.zed

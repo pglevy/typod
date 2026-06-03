@@ -1,0 +1,35 @@
+{
+  "tasks": {
+    "dev": "vite",
+    "fetch-feeds": "deno run --env --allow-net --allow-read --allow-write --allow-env scripts/fetch-feeds.ts",
+    "build": "deno check src/ scripts/ server.ts && vite build",
+    "build:full": "deno task fetch-feeds && deno task build",
+    "preview": "vite preview",
+    "test": "deno test --allow-read --allow-env scripts/ && vitest run",
+    "serve": "deno run --allow-net --allow-read server.ts"
+  },
+  "imports": {
+    "@std/path": "jsr:@std/path@^1.1.4",
+    "@std/http": "jsr:@std/http@^1.0.0",
+    "@std/testing": "jsr:@std/testing@^1.0.18",
+    "@std/assert": "jsr:@std/assert@^1.0.19",
+    "fast-xml-parser": "npm:fast-xml-parser@^5.8.0",
+    "sharp": "npm:sharp@^0.34.5",
+    "vite": "npm:vite@^7.2.4",
+    "vitest": "npm:vitest@^4.0.18",
+    "vitest/config": "npm:vitest@^4.0.18/config",
+    "jsdom": "npm:jsdom@^28.0.0"
+  },
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable", "deno.ns"]
+  },
+  "lint": {
+    "include": ["scripts/", "server.ts"]
+  },
+  "exclude": ["vitest.config.ts", "vite.config.ts"],
+  "nodeModulesDir": "auto",
+  "allowScripts": {
+    "allow": ["npm:esbuild@0.27.7", "npm:sharp@0.34.5"],
+    "deny": ["npm:fsevents@2.3.3"]
+  }
+}

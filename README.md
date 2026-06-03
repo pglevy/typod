@@ -90,21 +90,20 @@ Want to customize the code? Here's how to run it locally:
 
 ### Prerequisites
 
-- Node.js 22+
-- npm
+- [Deno](https://deno.com/) (latest)
 
 ### Local Setup
 
 ```bash
 git clone <your-repo-url>
 cd typod
-npm install
+deno install
 ```
 
 ### Development Server
 
 ```bash
-npm run dev
+deno task dev
 ```
 
 Opens at `http://localhost:5173`. Uses sample data from `public/data/episodes.json`.
@@ -112,30 +111,31 @@ Opens at `http://localhost:5173`. Uses sample data from `public/data/episodes.js
 ### Testing
 
 ```bash
-npm test           # run once
-npm run test:watch # watch mode
+deno task test
 ```
 
 ### Fetch Real Feeds Locally
 
 ```bash
-FEED_GIST_URL=<your-gist-url> npm run fetch-feeds
-npm run dev
+# Create a .env file with your Gist URL
+echo "FEED_GIST_URL=<your-gist-url>" > .env
+deno task fetch-feeds
+deno task dev
 ```
 
 ### Build for Production
 
 ```bash
-npm run build
+deno task build
 ```
 
-Output goes to `dist/`. Preview with `npm run preview`.
+Output goes to `dist/`. Preview with `deno task preview`, or serve with `deno task serve`.
 
 ## 📐 Architecture
 
 - **Build time**: GitHub Actions fetches RSS feeds, resizes artwork to WebP, merges episodes into a single sorted JSON file
 - **Runtime**: Vanilla TypeScript reads the static JSON, renders the episode list, plays audio via HTML5 `<audio>`, saves state to localStorage
-- **Stack**: Vite, TypeScript, Vitest, Sharp (image processing)
+- **Stack**: Deno, Vite, TypeScript, Vitest, Sharp (image processing)
 - **Styling**: Mobile-first CSS with warm color palette, Source Serif 4 headings
 
 ## 📄 License

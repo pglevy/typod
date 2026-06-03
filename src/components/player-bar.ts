@@ -1,5 +1,6 @@
-import { audioPlayer } from '../player';
-import { formatTime } from '../utils';
+import { audioPlayer } from '../player.ts';
+import type { Episode } from '../types.ts';
+import { formatTime } from '../utils.ts';
 
 const PLAY_ICON = `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
 const PAUSE_ICON = `<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
@@ -90,7 +91,7 @@ export function createPlayerBar(): PlayerBarHandle {
     playBtn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
   }
 
-  audioPlayer.on('play', (episode, _currentTime, _duration) => {
+  audioPlayer.on('play', (episode: Episode, _currentTime: number, _duration: number) => {
     epTitle.textContent = episode.title;
     feedTitle.textContent = episode.feedTitle;
     updatePlayButton(true);
@@ -104,7 +105,7 @@ export function createPlayerBar(): PlayerBarHandle {
     updatePlayButton(false);
   });
 
-  audioPlayer.on('timeupdate', (_episode, currentTime, duration) => {
+  audioPlayer.on('timeupdate', (_episode: Episode, currentTime: number, duration: number) => {
     if (!isSeeking) {
       seek.max = String(Math.floor(duration));
       seek.value = String(Math.floor(currentTime));
@@ -112,7 +113,7 @@ export function createPlayerBar(): PlayerBarHandle {
     }
   });
 
-  audioPlayer.on('loaded', (episode, currentTime, duration) => {
+  audioPlayer.on('loaded', (episode: Episode, currentTime: number, duration: number) => {
     epTitle.textContent = episode.title;
     feedTitle.textContent = episode.feedTitle;
     if (duration > 0) {

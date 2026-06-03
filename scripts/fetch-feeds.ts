@@ -1,6 +1,5 @@
 import { XMLParser } from 'fast-xml-parser';
-import * as fs from 'node:fs/promises';
-import * as path from 'node:path';
+import { join, resolve } from '@std/path';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -174,15 +173,15 @@ async function processArtwork(
   try {
     const res = await fetch(imageUrl);
     if (!res.ok) return null;
-    const buffer = Buffer.from(await res.arrayBuffer());
+    const data = new Uint8Array(await res.arrayBuffer());
 
     const sharp = (await import('sharp')).default;
-    const artworkDir = path.join(outDir, 'artwork');
-    await fs.mkdir(artworkDir, { recursive: true });
+    const artworkDir = join(outDir, 'artwork');
+    await Deno.mkdir(artworkDir, { recursive: true });
 
     await Promise.all([
-      sharp(buffer).resize(48, 48).webp({ quality: 80 }).toFile(path.join(artworkDir, `${slug}-48.webp`)),
-      sharp(buffer).resize(96, 96).webp({ quality: 80 }).toFile(path.join(artworkDir, `${slug}-96.webp`)),
+      sharp(data).resize(48, 48).webp({ quality: 80 }).toFile(join(artworkDir, `${slug}-48.webp`)),
+      sharp(data).resize(96, 96).webp({ quality: 80 }).toFile(join(artworkDir, `${slug}-96.webp`)),
     ]);
 
     return `data/artwork/${slug}-96.webp`;
@@ -232,17 +231,17 @@ export function mergeAndSort(
 // ---------------------------------------------------------------------------
 
 async function main() {
-  const gistUrl = process.env['FEED_GIST_URL'];
+  const gistUrl = Deno.env.get('FEED_GIST_URL');
   if (!gistUrl) {
     console.error('FEED_GIST_URL environment variable is required');
-    process.exit(1);
+    Deno.exit(1);
   }
 
   const feedList = await fetchFeedList(gistUrl);
   console.log(`Fetched ${feedList.length} feed URLs from Gist`);
 
-  const outDir = path.resolve('public/data');
-  await fs.mkdir(outDir, { recursive: true });
+  const outDir = resolve('public/data');
+  await Deno.mkdir(outDir, { recursive: true });
 
   const feedResults: { feed: ParsedFeed; slug: string; artworkSrc: string | null }[] = [];
 
@@ -266,18 +265,17 @@ async function main() {
 
   const episodes = mergeAndSort(feedResults);
 
-  await fs.writeFile(
-    path.join(outDir, 'episodes.json'),
+  await Deno.writeTextFile(
+    join(outDir, 'episodes.json'),
     JSON.stringify(episodes, null, 2),
   );
 
   console.log(`Wrote ${episodes.length} episodes to episodes.json`);
 }
 
-const isDirectRun = process.argv[1] && import.meta.url.endsWith(process.argv[1].replace(/.*\//, ''));
-if (isDirectRun) {
+if (import.meta.main) {
   main().catch((err) => {
     console.error('Fatal error:', err);
-    process.exit(1);
+    Deno.exit(1);
   });
 }
