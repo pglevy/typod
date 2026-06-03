@@ -1,7 +1,7 @@
 {
   "tasks": {
     "dev": "vite",
-    "fetch-feeds": "deno run --env --allow-net --allow-read --allow-write --allow-env scripts/fetch-feeds.ts",
+    "fetch-feeds": "deno run --env --allow-net --allow-read --allow-write --allow-env --allow-ffi scripts/fetch-feeds.ts",
     "build": "deno check src/ scripts/ server.ts && vite build",
     "build:full": "deno task fetch-feeds && deno task build",
     "preview": "vite preview",
