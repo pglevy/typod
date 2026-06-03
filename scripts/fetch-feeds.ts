@@ -172,7 +172,10 @@ async function processArtwork(
 ): Promise<string | null> {
   try {
     const res = await fetch(imageUrl);
-    if (!res.ok) return null;
+    if (!res.ok) {
+      console.warn(`Artwork fetch failed for ${slug}: ${res.status}`);
+      return imageUrl;
+    }
     const data = new Uint8Array(await res.arrayBuffer());
 
     const sharp = (await import('sharp')).default;
@@ -186,8 +189,8 @@ async function processArtwork(
 
     return `data/artwork/${slug}-96.webp`;
   } catch (err) {
-    console.warn(`Artwork processing failed for ${slug}:`, err);
-    return null;
+    console.warn(`Artwork processing failed for ${slug}, falling back to remote URL:`, err);
+    return imageUrl;
   }
 }
 

@@ -36,6 +36,13 @@ jobs:
         env:
           FEED_GIST_URL: ${{ vars.FEED_GIST_URL }}
 
+      - name: Verify artwork was generated
+        run: |
+          if ! grep -q '"artworkSrc": "data/artwork/' public/data/episodes.json; then
+            echo "::error::No local artwork paths found in episodes.json — sharp may have failed"
+            exit 1
+          fi
+
       - name: Build
         run: deno task build
 
