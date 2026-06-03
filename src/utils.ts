@@ -22,6 +22,12 @@ export function formatDate(isoString: string): string {
   return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 }
 
+export function decodeEntities(text: string): string {
+  const el = document.createElement('span');
+  el.innerHTML = text;
+  return el.textContent ?? text;
+}
+
 export function stripHtml(html: string): string {
   const div = document.createElement('div');
   // Preserve line breaks from block-level elements and <br> tags

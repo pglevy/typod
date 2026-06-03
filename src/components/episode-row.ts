@@ -1,5 +1,5 @@
 import type { Episode } from '../types.ts';
-import { formatDuration, formatDate, stripHtml } from '../utils.ts';
+import { formatDuration, formatDate, stripHtml, decodeEntities } from '../utils.ts';
 
 export function createEpisodeRow(
   episode: Episode,
@@ -40,7 +40,7 @@ export function createEpisodeRow(
 
   const title = document.createElement('div');
   title.className = 'episode-title';
-  title.textContent = episode.title;
+  title.textContent = decodeEntities(episode.title);
 
   const meta = document.createElement('div');
   meta.className = 'episode-meta';
