@@ -9,16 +9,16 @@
     "serve": "deno run --allow-net --allow-read server.ts"
   },
   "imports": {
-    "@std/path": "jsr:@std/path@^1.1.4",
-    "@std/http": "jsr:@std/http@^1.0.0",
-    "@std/testing": "jsr:@std/testing@^1.0.18",
+    "@std/path": "jsr:@std/path@^1.1.6",
+    "@std/http": "jsr:@std/http@^1.1.2",
+    "@std/testing": "jsr:@std/testing@^1.0.19",
     "@std/assert": "jsr:@std/assert@^1.0.19",
     "fast-xml-parser": "npm:fast-xml-parser@^5.8.0",
     "sharp": "npm:sharp@^0.34.5",
     "vite": "npm:vite@^7.2.4",
-    "vitest": "npm:vitest@^4.0.18",
+    "vitest": "npm:vitest@^4.1.10",
     "vitest/config": "npm:vitest@^4.0.18/config",
-    "jsdom": "npm:jsdom@^28.0.0"
+    "jsdom": "npm:jsdom@^28.1.0"
   },
   "compilerOptions": {
     "lib": ["ES2022", "DOM", "DOM.Iterable", "deno.ns"]
