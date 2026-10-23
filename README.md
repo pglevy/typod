@@ -90,20 +90,21 @@ Want to customize the code? Here's how to run it locally:
 
 ### Prerequisites
 
-- [Deno](https://deno.com/) (latest)
+- [Node.js](https://nodejs.org/) 22.18 or newer
+- [pnpm](https://pnpm.io/) (the exact version is pinned via `packageManager` in `package.json`; [Corepack](https://nodejs.org/api/corepack.html) will pick it up)
 
 ### Local Setup
 
 ```bash
 git clone <your-repo-url>
 cd typod
-deno install
+pnpm install
 ```
 
 ### Development Server
 
 ```bash
-deno task dev
+pnpm dev
 ```
 
 Opens at `http://localhost:5173`. Uses sample data from `public/data/episodes.json`.
@@ -111,7 +112,7 @@ Opens at `http://localhost:5173`. Uses sample data from `public/data/episodes.js
 ### Testing
 
 ```bash
-deno task test
+pnpm test
 ```
 
 ### Fetch Real Feeds Locally
@@ -119,23 +120,23 @@ deno task test
 ```bash
 # Create a .env file with your Gist URL
 echo "FEED_GIST_URL=<your-gist-url>" > .env
-deno task fetch-feeds
-deno task dev
+pnpm fetch-feeds
+pnpm dev
 ```
 
 ### Build for Production
 
 ```bash
-deno task build
+pnpm build
 ```
 
-Output goes to `dist/`. Preview with `deno task preview`, or serve with `deno task serve`.
+Output goes to `dist/`. Preview it locally with `pnpm preview`.
 
 ## 📐 Architecture
 
 - **Build time**: GitHub Actions fetches RSS feeds, resizes artwork to WebP, merges episodes into a single sorted JSON file
 - **Runtime**: Vanilla TypeScript reads the static JSON, renders the episode list, plays audio via HTML5 `<audio>`, saves state to localStorage
-- **Stack**: Deno, Vite, TypeScript, Vitest, Sharp (image processing)
+- **Stack**: Node.js, pnpm, Vite, TypeScript, Vitest, Sharp (image processing)
 - **Styling**: Mobile-first CSS with warm color palette, Source Serif 4 headings
 
 ## 📄 License

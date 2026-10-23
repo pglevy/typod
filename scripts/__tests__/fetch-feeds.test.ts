@@ -1,5 +1,4 @@
-import { describe, it } from '@std/testing/bdd';
-import { assertEquals, assertNotEquals } from '@std/assert';
+import { describe, it, expect } from 'vitest';
 import { parseRssFeed, toSlug, mergeAndSort } from '../fetch-feeds.ts';
 
 const VALID_RSS = `<?xml version="1.0" encoding="UTF-8"?>
@@ -29,27 +28,27 @@ const VALID_RSS = `<?xml version="1.0" encoding="UTF-8"?>
 describe('parseRssFeed', () => {
   it('extracts feed title and image URL', () => {
     const feed = parseRssFeed(VALID_RSS);
-    assertNotEquals(feed, null);
-    assertEquals(feed!.title, 'My Test Podcast');
-    assertEquals(feed!.imageUrl, 'https://example.com/art.jpg');
+    expect(feed).not.toBeNull();
+    expect(feed!.title).toBe('My Test Podcast');
+    expect(feed!.imageUrl).toBe('https://example.com/art.jpg');
   });
 
   it('extracts episode fields correctly', () => {
     const feed = parseRssFeed(VALID_RSS)!;
-    assertEquals(feed.episodes.length, 2);
+    expect(feed.episodes).toHaveLength(2);
 
     const ep1 = feed.episodes[0];
-    assertEquals(ep1.guid, 'ep-1');
-    assertEquals(ep1.title, 'Episode One');
-    assertEquals(ep1.pubDate, '2025-02-03T14:00:00.000Z');
-    assertEquals(ep1.duration, 4530); // 1*3600 + 15*60 + 30
-    assertEquals(ep1.enclosureUrl, 'https://example.com/ep1.mp3');
-    assertEquals(ep1.description, 'First episode description.');
+    expect(ep1.guid).toBe('ep-1');
+    expect(ep1.title).toBe('Episode One');
+    expect(ep1.pubDate).toBe('2025-02-03T14:00:00.000Z');
+    expect(ep1.duration).toBe(4530); // 1*3600 + 15*60 + 30
+    expect(ep1.enclosureUrl).toBe('https://example.com/ep1.mp3');
+    expect(ep1.description).toBe('First episode description.');
   });
 
   it('parses MM:SS duration format', () => {
     const feed = parseRssFeed(VALID_RSS)!;
-    assertEquals(feed.episodes[1].duration, 2700); // 45*60
+    expect(feed.episodes[1].duration).toBe(2700); // 45*60
   });
 
   it('limits to 10 episodes', () => {
@@ -65,19 +64,19 @@ describe('parseRssFeed', () => {
       <rss version="2.0"><channel><title>Big Feed</title>${items}</channel></rss>`;
 
     const feed = parseRssFeed(xml)!;
-    assertEquals(feed.episodes.length, 10);
+    expect(feed.episodes).toHaveLength(10);
   });
 
   it('returns null for malformed XML', () => {
     const feed = parseRssFeed('this is not xml at all <<<>>>');
     // fast-xml-parser may still parse this but there won't be rss.channel
     // Either way, it should not throw
-    assertEquals(feed, null);
+    expect(feed).toBeNull();
   });
 
   it('returns null for XML without rss channel', () => {
     const feed = parseRssFeed('<?xml version="1.0"?><html><body>Not a feed</body></html>');
-    assertEquals(feed, null);
+    expect(feed).toBeNull();
   });
 
   it('handles a feed with a single item (not an array)', () => {
@@ -88,26 +87,26 @@ describe('parseRssFeed', () => {
         </item>
       </channel></rss>`;
     const feed = parseRssFeed(xml)!;
-    assertEquals(feed.episodes.length, 1);
-    assertEquals(feed.episodes[0].guid, 'only-one');
+    expect(feed.episodes).toHaveLength(1);
+    expect(feed.episodes[0].guid).toBe('only-one');
   });
 });
 
 describe('toSlug', () => {
   it('converts a simple title to a slug', () => {
-    assertEquals(toSlug('Tech Talks Daily'), 'tech-talks-daily');
+    expect(toSlug('Tech Talks Daily')).toBe('tech-talks-daily');
   });
 
   it('strips leading/trailing hyphens', () => {
-    assertEquals(toSlug('  --Hello World--  '), 'hello-world');
+    expect(toSlug('  --Hello World--  ')).toBe('hello-world');
   });
 
   it('collapses multiple non-alphanumeric chars', () => {
-    assertEquals(toSlug("It's a Test! Really?"), 'it-s-a-test-really');
+    expect(toSlug("It's a Test! Really?")).toBe('it-s-a-test-really');
   });
 
   it('handles unicode by removing non-ascii', () => {
-    assertEquals(toSlug('Café Podcast'), 'caf-podcast');
+    expect(toSlug('Café Podcast')).toBe('caf-podcast');
   });
 });
 
@@ -140,10 +139,10 @@ describe('mergeAndSort', () => {
     ];
 
     const result = mergeAndSort(feeds);
-    assertEquals(result.length, 3);
-    assertEquals(result[0].guid, 'a2'); // Feb 3
-    assertEquals(result[1].guid, 'b1'); // Feb 2
-    assertEquals(result[2].guid, 'a1'); // Feb 1
+    expect(result).toHaveLength(3);
+    expect(result[0].guid).toBe('a2'); // Feb 3
+    expect(result[1].guid).toBe('b1'); // Feb 2
+    expect(result[2].guid).toBe('a1'); // Feb 1
   });
 
   it('uses feed title as tiebreaker for same-date episodes', () => {
@@ -173,8 +172,8 @@ describe('mergeAndSort', () => {
     ];
 
     const result = mergeAndSort(feeds);
-    assertEquals(result[0].feedTitle, 'Alpha Pod');
-    assertEquals(result[1].feedTitle, 'Zebra Cast');
+    expect(result[0].feedTitle).toBe('Alpha Pod');
+    expect(result[1].feedTitle).toBe('Zebra Cast');
   });
 
   it('denormalizes feed info onto each episode', () => {
@@ -193,8 +192,8 @@ describe('mergeAndSort', () => {
     ];
 
     const result = mergeAndSort(feeds);
-    assertEquals(result[0].feedTitle, 'My Show');
-    assertEquals(result[0].feedSlug, 'my-show');
-    assertEquals(result[0].artworkSrc, 'data/artwork/my-show-96.webp');
+    expect(result[0].feedTitle).toBe('My Show');
+    expect(result[0].feedSlug).toBe('my-show');
+    expect(result[0].artworkSrc).toBe('data/artwork/my-show-96.webp');
   });
 });
